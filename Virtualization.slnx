@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="MinimalVT/MinimalVT.vcxproj">
+    <Deploy />
+  </Project>
+  <Project Path="NamedEvent/NamedEvent.vcxproj">
+    <Deploy />
+  </Project>
+  <Project Path="Virtualization/Virtualization.vcxproj">
+    <Deploy />
+  </Project>
+</Solution>
