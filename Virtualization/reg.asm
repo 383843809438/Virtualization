@@ -98,11 +98,13 @@ GetGdtBase PROC
 	add rsp, 40
 	ret
 GetGdtBase ENDP
+
 GetLdtr PROC
     xor eax, eax
     sldt ax
     ret
 GetLdtr ENDP
+
 GetTrSelector PROC
     xor eax, eax
     str ax

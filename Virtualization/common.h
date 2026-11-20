@@ -33,6 +33,4 @@ BOOLEAN CommonCheckBios();
 BOOLEAN CommonCheckCpuid();
 BOOLEAN CommonCheckCr4();
 //asm
-void CmGuestRip();
-void CmGuestRsp();
-void CmVmCall(ULONG opcode);
+BOOLEAN __fastcall AsmVmxLaunch(PVOID rcx);

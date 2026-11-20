@@ -17,6 +17,9 @@
       <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
       <Extensions>inf;inv;inx;mof;mc;</Extensions>
     </Filter>
+    <Filter Include="VMX">
+      <UniqueIdentifier>{2e1406bd-1435-42c3-a274-e82347b8e29a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -26,7 +29,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VMX.c">
-      <Filter>Source Files</Filter>
+      <Filter>VMX</Filter>
+    </ClCompile>
+    <ClCompile Include="VMCS.c">
+      <Filter>VMX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +45,14 @@
     <ClInclude Include="CPU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VMX.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="reg.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VMCS.h">
+      <Filter>VMX</Filter>
+    </ClInclude>
+    <ClInclude Include="VMX.h">
+      <Filter>VMX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

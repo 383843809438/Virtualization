@@ -52,10 +52,12 @@ int VmxInitCpu()
     ULONG64 vmcsPhys = physvmcs.QuadPart;
 	__vmx_vmclear(&vmcsPhys);
 	__vmx_vmptrld(&vmcsPhys);
-	//填充VMCS
-	CmGuestRsp();
-	
-    //VMXSetupVmcs();
+	//initGuestArea填充VMCS
+    BOOLEAN b= AsmVmxLaunch((PVOID)initGuestArea);
+    if (b)
+    {
+        DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "[+] AsmVmxLaunch success!\n");
+    }
     return 0;
 }
 void fillTRSelectorData() {
@@ -129,7 +131,7 @@ int VMXSetupVmcs(PVOID guestRSP)
     __vmx_vmwrite(HOST_IDTR_BASE, GetIdtBase());
     //guest rsp和rip
 	__vmx_vmwrite(GUEST_RSP, (ULONG64)guestRSP);
-	__vmx_vmwrite(GUEST_RIP, (ULONG64)CmGuestRip);
+	
     __vmx_vmwrite(GUEST_RFLAGS, __readeflags());
 
     ULONG cpuNumber = KeGetCurrentProcessorNumber();
@@ -257,17 +259,18 @@ void CommonVtStart(struct _KDPC* Dpc, PVOID DeferredContext, PVOID SystemArgumen
     else {
         DbgPrintEx(DPFLTR_IHVDRIVER_ID,
             0,
-            "[+] current cpuNumber: %u, check failed\n",
+            "[CPU:%d]VT  not supported \n",
             (unsigned)cpuNumber
         );
     }
-    KeSignalCallDpcDone(SystemArgument1);
+
     KeSignalCallDpcSynchronize(SystemArgument2);
+    KeSignalCallDpcDone(SystemArgument1);
 }
 
 void VtShutdown(KDPC* Dpc, PVOID DeferredContext, PVOID SystemArgument1, PVOID SystemArgument2)
 {
-    CmVmCall(1);
+    
 	//释放内存
     VmxFreeMemory();
 	ULONG64 myCr4 = __readcr4();

@@ -4,6 +4,7 @@
 #include"CPU.h"
 #include"common.h"
 #include"reg.h"
+#include"VMCS.h"
 typedef struct _VMX_VMCS {
 	ULONG RevisionId;
 	ULONG AbortIndicator;
